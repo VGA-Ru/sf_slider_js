@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Yeseva';
+    src: url('./YesevaOne-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('./NunitoSans_10pt_Condensed-Regular.ttf');
+    font-weight: normal;
+}
