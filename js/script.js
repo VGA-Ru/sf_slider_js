@@ -37,33 +37,29 @@ function initSlider() {
     slides.forEach((image, index) => {
         let imageDiv = `<img class="image link${index} ${index === 0 ? "active_image" : ""}" src="${slides[index].img}" data-index="${index}">`;
         imagesSlider.innerHTML += imageDiv;
-    })
 
-    slides.forEach((img, index) => {
-        let dot = `<button class="slider_dot link${index} ${index === 0? "active_dot" : ""}" data-index="${index}"></button>`;
+        let dot = `<button class="slider_dot link${index} ${index === 0 ? "active_dot" : ""}" data-index="${index}"></button>`;
         navDots.innerHTML += dot;
-
-        navDots.querySelectorAll(".slider_dot").forEach(dot => {
-            dot.addEventListener("click", function() {
-                moveSlider(this.dataset.index);
-            })
-        })
     })
 
-    legendList.querySelectorAll(".legend__link").forEach(title => {
-        title.addEventListener("click", function() {
-            moveSlider(this.dataset.index);
-        })
-    })
+    navDots.addEventListener("click", function (event) {
+        if (event.target.classList.contains("slider_dot")) {
+            moveSlider(event.target.dataset.index);
+        }
+    });
+
+    legendList.addEventListener("click", function (event) {
+        if (event.target.classList.contains("legend__link")) {
+            moveSlider(event.target.dataset.index);
+        }
+    });
 
     next.addEventListener("click", () => {
-        if (slideNum === slides.length - 1) slideNum = -1;
-        moveSlider(slideNum + 1);
+        moveSlider((slideNum + 1) % slides.length);
     })
 
     prev.addEventListener("click", () => {
-        if (slideNum === 0) slideNum = slides.length
-        moveSlider(slideNum - 1);
+        moveSlider((slideNum - 1 + slides.length) % slides.length);
     })
 
     function moveSlider(num) {
